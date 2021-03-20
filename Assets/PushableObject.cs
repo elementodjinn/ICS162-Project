@@ -8,6 +8,7 @@ public class PushableObject : MonoBehaviour
     public int speed = 10;
     public bool beingPushed = false;
     public GameObject player;
+    public bool canBePushed = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,23 +27,26 @@ public class PushableObject : MonoBehaviour
 
     public void BePushed(PlayerMovement.Direction pushingD)
     {
-        blockRB.isKinematic = false;
-        if(pushingD == PlayerMovement.Direction.Up)
+        if(canBePushed)
         {
-            blockRB.AddForce(new Vector3(speed, 0, 0), ForceMode.VelocityChange);
-        }
-        else if (pushingD == PlayerMovement.Direction.Down)
-        {
-            blockRB.AddForce(new Vector3(-speed, 0, 0), ForceMode.VelocityChange);
-        }
-        else if (pushingD == PlayerMovement.Direction.Left)
-        {
-            blockRB.AddForce(new Vector3(0, 0, speed), ForceMode.VelocityChange);
-        }
-        else if (pushingD == PlayerMovement.Direction.Right)
-        {
-            blockRB.AddForce(new Vector3(0, 0, -speed), ForceMode.VelocityChange);
-        }
-        beingPushed = true;
+            blockRB.isKinematic = false;
+            if (pushingD == PlayerMovement.Direction.Up)
+            {
+                blockRB.AddForce(new Vector3(speed, 0, 0), ForceMode.VelocityChange);
+            }
+            else if (pushingD == PlayerMovement.Direction.Down)
+            {
+                blockRB.AddForce(new Vector3(-speed, 0, 0), ForceMode.VelocityChange);
+            }
+            else if (pushingD == PlayerMovement.Direction.Left)
+            {
+                blockRB.AddForce(new Vector3(0, 0, speed), ForceMode.VelocityChange);
+            }
+            else if (pushingD == PlayerMovement.Direction.Right)
+            {
+                blockRB.AddForce(new Vector3(0, 0, -speed), ForceMode.VelocityChange);
+            }
+            beingPushed = true;
+        }   
     }
 }
